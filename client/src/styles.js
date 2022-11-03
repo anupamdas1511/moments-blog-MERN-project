@@ -14,5 +14,8 @@ export default makeStyles(()=>({
       },
       image: {
         marginLeft: '15px',
+      },
+      mainContainer: {
+        flexDirection: 'column-reverse'
       }
 }))
