@@ -5,7 +5,7 @@ export const getPost = async (req, res)=>{
     try {
         const postMessages = await PostMessage.find()
 
-        console.log(postMessages)
+        // console.log(postMessages)
 
         res.status(200).json(postMessages)
     } catch (error) {
@@ -33,9 +33,9 @@ export const updatePost = async (req, res) => {
     if(!mongoose.Types.ObjectId.isValid(_id)) return res.status(404).send('No post with that id')
     // if(mongoose.Types.ObjectId.isValid(_id)) console.log("valid ID")
     
-    console.log(post)
+    // console.log(post)
     const updatedPost = await PostMessage.findByIdAndUpdate(_id, { ...post, _id }, { new: true })
-    console.log(updatedPost)
+    // console.log(updatedPost)
     // console.log("This is updated post")
 
     res.json(updatedPost)
