@@ -4,9 +4,7 @@ import { getPost, createPost, updatePost, deletePost, likePost } from '../contro
 
 const router = express.Router()
 
-router.get('/posts', ()=>{
-    console.log('anuam');
-})
+// Creating routes
 router.get('/', getPost)
 router.post('/', createPost)
 router.patch('/:id', updatePost)

@@ -17,12 +17,13 @@ app.use(cors())
 app.use('/posts', postRoutes)
 
 const PORT = process.env.PORT || 5000
+
+// Listening to port 5000
 app.listen(PORT, ()=> console.log(`Server running at PORT: ${PORT}`))
-// mongoose.connect(CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true })
+
+// Connecting to mongoDB dataBase
 mongoose.connect(process.env.LOCAL_CONNECTION)
     .then(()=>{
         console.log("Connected to mongoDB database");
     })
     .catch((error)=> console.log(error))
-
-// mongoose.set('useFindAndModify', false)
