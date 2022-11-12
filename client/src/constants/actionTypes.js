@@ -8,3 +8,6 @@ export const DELETE = 'DELETE'
 
 export const LIKE = 'LIKE'
 
+export const AUTH = 'AUTH'
+
+export const LOGOUT = 'LOGOUT'

@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+import { useHistory } from 'react-router-dom'
 import { Typography, Avatar, Button, Paper, Grid, Container } from '@material-ui/core'
 import { GoogleLogin } from 'react-google-login'
 import { gapi } from 'gapi-script'
@@ -10,6 +12,8 @@ import Icon from './Icon'
 function Auth() {
     const clientId = `723204850420-uui9le9tte3nl38ip1bk03a1b89kd567.apps.googleusercontent.com`
     const classes = useStyles()
+    const dispatch = useDispatch()
+    const history = useHistory()
     const [isSignup, setIsSignup] = useState(false)
     const [ showPassword, setShowPassword ] = useState(false)
 
@@ -31,7 +35,15 @@ function Auth() {
          gapi.load('client:auth2', initClient);
      })
     const googleSuccess = async (res) => {
-        console.log(res)
+        const result = res?.profileObj
+        const token = res?.tokenId
+
+        try {
+            dispatch({ type: "AUTH", data: { result, token } })
+            history.push('/')
+        } catch (error) {
+            console.log(error)
+        }
     }
     const googleFaliure = (error) => {
         console.log(error)
