@@ -32,7 +32,7 @@ export const signup = async (req, res) => {
 
         if(existingUser) return res.status(400).json({ message: "User already exists" })
 
-        if(password !== existingUser.password) return res.status(400).json({ message: "Passworf doesn't match" })
+        if(password !== existingUser.password) return res.status(400).json({ message: "Password doesn't match" })
 
         const hashedPassword = bcrypt.hash(password, 12)
 
