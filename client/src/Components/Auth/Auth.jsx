@@ -9,6 +9,8 @@ import useStyles from './styles'
 import Input from './Input'
 import Icon from './Icon'
 
+const initial = { firstName: '', lastName: '', email: '', password: '', confirmPassword: '' }
+
 function Auth() {
     const clientId = `723204850420-uui9le9tte3nl38ip1bk03a1b89kd567.apps.googleusercontent.com`
     const classes = useStyles()
@@ -16,9 +18,19 @@ function Auth() {
     const history = useHistory()
     const [isSignup, setIsSignup] = useState(false)
     const [ showPassword, setShowPassword ] = useState(false)
+    const [ formData, setFormData ] = useState(initial)
 
-    const handleSubmit = () => { }
-    const handleChange = () => { }
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        if(isSignup) {
+
+        }else {
+            
+        }
+    }
+    const handleChange = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value })
+    }
     const handleShowPassword = () => setShowPassword((prevShowPassword) => !prevShowPassword)
     const changeMode = () => {
         setIsSignup((prevIsSignUp) => !prevIsSignUp)
