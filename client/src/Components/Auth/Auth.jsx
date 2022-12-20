@@ -8,6 +8,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import useStyles from './styles'
 import Input from './Input'
 import Icon from './Icon'
+import { signin, signup } from '../../actions/auth'
 
 const initial = { firstName: '', lastName: '', email: '', password: '', confirmPassword: '' }
 
@@ -23,9 +24,9 @@ function Auth() {
     const handleSubmit = (e) => {
         e.preventDefault()
         if(isSignup) {
-
+            dispatch(signup(formData, history))
         }else {
-            
+            dispatch(signin(formData, history))
         }
     }
     const handleChange = (e) => {
@@ -36,7 +37,7 @@ function Auth() {
         setIsSignup((prevIsSignUp) => !prevIsSignUp)
         setShowPassword(false)
     }
-
+    // Using Gapi Scripts to use react-google-login
     useEffect(() => {
         const initClient = () => {
               gapi.auth2.init({

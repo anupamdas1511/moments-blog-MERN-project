@@ -1,4 +1,6 @@
-import bcrypt from 'bcryptjs'
+// ! For some reason bcrypt.hash is not working
+// * Looking into it...
+// import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 
 import User from '../Models/user.js'
@@ -11,7 +13,9 @@ export const signin = async (req, res) => {
 
         if(!existingUser) return res.status(404).json({ message: "User doesn't exist" })
 
-        const isPasswordCorrect = await bcrypt.compare(password, existingUser.password)
+        // const isPasswordCorrect = await bcrypt.compare(password, existingUser.password)
+
+        const isPasswordCorrect = password === existingUser.password
 
         if(!isPasswordCorrect) return res.status(400).json({ message: "Invalid Credentials" })
 
@@ -26,15 +30,20 @@ export const signin = async (req, res) => {
 
 export const signup = async (req, res) => {
     const { email, password, confirmPassword, firstName, lastName } = req.body
+    console.log(req.body);
 
     try {
         const existingUser = await User.findOne({ email })
 
         if(existingUser) return res.status(400).json({ message: "User already exists" })
 
-        if(password !== existingUser.password) return res.status(400).json({ message: "Password doesn't match" })
+        if(password !== confirmPassword) return res.status(400).json({ message: "Password doesn't match" })
 
-        const hashedPassword = bcrypt.hash(password, 12)
+        // const hashedPassword = bcrypt.hash(password, 12)
+
+        const hashedPassword = password
+
+        console.log(hashedPassword);
 
         const result = await User.create({ email, password: hashedPassword, name: `${firstName} ${lastName}` })
 
