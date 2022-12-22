@@ -40,13 +40,13 @@ function Home() {
     }
 
     const searchPost = () => {
-        if(search.trim() || tags) {
+        if(!tags.length && !search ) {
+            history.push('/')
+        }else if(search.trim() || tags) {
             // dispatch -> fetch search posts
             dispatch(getPostsBySearch({ search, tags: tags.join(',') }))
             
             history.push(`/posts/search?searchQuery=${search}&tags=${tags.join(',')}`)
-        }else {
-            history.push('/')
         }
     }
 
