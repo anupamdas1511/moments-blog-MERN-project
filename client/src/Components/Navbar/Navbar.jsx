@@ -4,7 +4,9 @@ import { Link, useHistory, useLocation } from 'react-router-dom'
 import { Typography, AppBar, Toolbar, Avatar, Button } from '@material-ui/core'
 import useStyles from './styles'
 import decode from 'jwt-decode'
-import memories from '../../images/memories.png'
+import hourglass from '../../images/hourglass.png'
+
+import './Navbar.css'
 
 function Navbar() {
     const classes = useStyles()
@@ -21,6 +23,7 @@ function Navbar() {
         history.push('/')
         setUser(null)
     }
+
 
     useEffect(() => {
         const token = user?.token
@@ -39,8 +42,8 @@ function Navbar() {
     return (
         <AppBar className={classes.appBar} position="static" color="inherit">
             <div className={classes.brandContainer}>
-                <Typography component={Link} to='/' className={classes.heading} variant="h2" align="center">Memories</Typography>
-                <img className={classes.image} src={memories} alt="memories" height={60} />
+                <Typography component={Link} to='/' className={classes.heading} variant="h2" align="center">Moments</Typography>
+                <img id='image' className={classes.image} src={hourglass} alt="memories" height={60} />
             </div>
             <Toolbar className={classes.toolbar}>
                 { user ? (
@@ -50,7 +53,7 @@ function Navbar() {
                         <Button variant='contained' className={classes.logout} color='secondary' onClick={logout}>Logout</Button>
                     </div>
                 ):(
-                    <Button component={ Link } to='/auth' variant='contained' color='primary'>Sign In</Button>
+                    <Button className={classes.signin} component={ Link } to='/auth' variant='contained' color='primary'>Sign In</Button>
                 )}
             </Toolbar>
         </AppBar>

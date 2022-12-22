@@ -1,0 +1,15 @@
+#image{
+    animation: animate 1.5s infinite ease-in-out;
+}
+
+@keyframes animate {
+    0%{
+        rotate: 0deg;
+    }
+    50%{
+        rotate: 180deg;
+    }
+    100%{
+        rotate: 360deg;
+    }
+}
