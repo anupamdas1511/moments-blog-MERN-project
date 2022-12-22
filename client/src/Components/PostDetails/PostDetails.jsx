@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import moment from 'moment'
 import { useParams, useHistory } from 'react-router-dom'
 import { getPost, getPostsBySearch } from '../../actions/posts'
+import CommentSection from './CommentSection'
 
 import useStyles from './styles'
 
@@ -16,19 +17,17 @@ const PostDetails = () => {
 
     useEffect(() => {
         dispatch(getPost(id))
-    }, [id])
+    }, [id, dispatch])
 
     useEffect(() => {
         if(post) {
             dispatch(getPostsBySearch({ search: 'none', tags: post?.tags.join(',') }))
         }
-    }, [post])
+    }, [post, dispatch])
 
-    const recommendedPosts = posts.filter(({ _id }) => _id !== post._id)
+    const recommendedPosts = posts.filter(({ _id }) => _id !== post?._id)
 
-    const openPost = (_id) => {
-        history.push(`/posts/${_id}`)
-    }
+    const openPost = (_id) => history.push(`/posts/${_id}`)
 
     if(!post) return null
 
@@ -53,7 +52,7 @@ const PostDetails = () => {
                 <Divider style={{ margin: '20px 0' }}/>
                 <Typography variant='body1'><strong>Realtime Chat - Coming Soon</strong></Typography>
                 <Divider style={{ margin: '20px 0' }}/>
-                <Typography variant='body1'><strong>Comments - Coming soon</strong></Typography>
+                <CommentSection post={post}/>
                 <Divider style={{ margin: '20px 0' }}/>
             </div>
             <div className={classes.imageSection}>
@@ -65,15 +64,15 @@ const PostDetails = () => {
                 <Typography gutterBottom variant='h5' >You might also like:</Typography>
                 <Divider />
                 <div className={classes.recommendedPosts}>
-                    {recommendedPosts.map(({ title, message, name, likes, selectedFile, _id }) => {
-                        <div style={{ margin: '20px', cursor: 'pointer' }} onClick={()=>openPost(_id)} key={_id}>
+                    {recommendedPosts.map(({ title, message, name, likes, selectedFile, _id }) => (
+                         <div style={{ margin: '20px', cursor: 'pointer' }} onClick={()=>openPost(_id)} key={_id}>
                             <Typography gutterBottom variant='h6'>{title}</Typography>
                             <Typography gutterBottom variant='subtitle2'>{name}</Typography>
                             <Typography gutterBottom variant='subtitle2'>{message}</Typography>
                             <Typography gutterBottom variant='subtitle1'>Like:{likes.length}</Typography>
                             <img src={selectedFile} width='200px' alt="" />
                         </div>
-                    })}
+                    ))}
                 </div>
             </div>
         )}

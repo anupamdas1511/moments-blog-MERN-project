@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Container, Grow, Grid, Paper, AppBar, TextField, Button } from '@material-ui/core'
 import { useHistory, useLocation } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { getPosts, getPostsBySearch } from '../../actions/posts'
+import { getPostsBySearch } from '../../actions/posts'
 import ChipInput from 'material-ui-chip-input'
 import useStyles from './styles'
 import Pagination from '../Pagination/Pagination'
@@ -19,7 +19,6 @@ function Home() {
     const [search, setSearch] = useState('')
     const [tags, setTags] = useState([])
     const history = useHistory()
-    const location = useLocation()
     const query = useQuery()
     const page = query.get('page') || 1
     const searchQuery = query.get('searchQuery')
@@ -76,7 +75,7 @@ function Home() {
                                 onDelete={handleDelete}
                                 variant='outlined'
                             />
-                            <Button onClick={searchPost} className={classes.searchButton} variant='contained    ' color='primary'>Search...</Button>
+                            <Button onClick={searchPost} className={classes.searchButton} variant='contained' color='primary'>Search...</Button>
                         </AppBar>
                         <Form currentId={currentId} setCurrentId={setCurrentId} />
                         {(!searchQuery && !tags.length) && (
