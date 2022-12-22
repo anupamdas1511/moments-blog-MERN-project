@@ -19,6 +19,7 @@ export default makeStyles({
     justifyContent: 'space-between',
     borderRadius: '15px',
     height: '100%',
+    maxHeight: '300px',
     position: 'relative',
   },
   overlay: {

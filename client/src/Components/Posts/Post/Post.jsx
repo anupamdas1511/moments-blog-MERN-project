@@ -1,23 +1,30 @@
 import React from 'react'
 import { Card, CardActions, CardContent, CardMedia, Button, Typography } from '@material-ui/core'
-import { ThumbupAltIcon, ThumbUpAltOutlined } from '@material-ui/icons/ThumbUpAlt'
+import ThumbupAltIcon from '@material-ui/icons/ThumbUpAlt'
+import ThumbUpAltOutlined from '@material-ui/icons/ThumbUpAltOutlined'
 import DeleteIcon from '@material-ui/icons/Delete'
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz'
 import moment from 'moment'
 import useStyles from './style'
 import { useDispatch } from 'react-redux'
 
-import { deletePost, likePost } from '../../../actions/posts'
+// import { useHistory } from 'react-router-dom'
+
+import { deletePost, likePost, getPosts } from '../../../actions/posts'
 
 const Post = ({ post, setCurrentId }) => {
   const dispatch = useDispatch()
   const classes = useStyles()
   const user = JSON.parse(localStorage.getItem('profile'))
 
+  // const history = useHistory()
+
   const del = () => {
     dispatch(deletePost(post._id))
 
     setCurrentId(null)
+    // history.push('/')
+    dispatch(getPosts())
   }
 
   const Likes = () => {
@@ -34,7 +41,7 @@ const Post = ({ post, setCurrentId }) => {
   }
 
   return (
-    <Card className={classes.card}>
+    <Card className={classes.card} raised elevation={6}>
       <CardMedia className={classes.media} image={post.selectedFile} title={post.title} />
       <div className={classes.overlay}>
         <Typography variant='h6'>{post.name}</Typography>
@@ -52,7 +59,7 @@ const Post = ({ post, setCurrentId }) => {
       </div>
       <Typography className={classes.title} variant='h5' gutterBottom>{post.title}</Typography>
       <CardContent>
-        <Typography variant='body5' color='textSecondary' component="p">{post.message}</Typography>
+        <Typography style={{ maxHeight: '50px' }} variant='body5' color='textSecondary' component="p">{post.message}</Typography>
       </CardContent>
       <CardActions className={classes.cardActions}>
         <Button size='small' color='primary' disabled={!user?.result} onClick={() => dispatch(likePost(post._id))}>
