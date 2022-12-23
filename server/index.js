@@ -18,10 +18,11 @@ app.use(cors())
 app.use('/posts', postRoutes)
 app.use('/user', userRoutes)
 
+const hostname = '0.0.0.0'
 const PORT = process.env.PORT || 5000
 
 // Listening to port 5000
-app.listen(PORT, ()=> console.log(`Server running at PORT: ${PORT}`))
+app.listen(PORT, hostname, ()=> console.log(`Server running at http://${hostname}:${PORT}`))
 
 // Connecting to mongoDB dataBase
 mongoose.connect(process.env.CONNECTION_URL)
