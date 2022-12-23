@@ -1,8 +1,8 @@
-import express from 'express'
-import bodyParser from 'body-parser'
-import cors from 'cors'
-import mongoose from 'mongoose'
-import * as dotenv from 'dotenv'
+import express from 'express.js'
+import bodyParser from 'body-parser.js'
+import cors from 'cors.js'
+import mongoose from 'mongoose.js'
+import * as dotenv from 'dotenv.js'
 dotenv.config()
 
 import postRoutes from './routes/posts.js'
