@@ -21,6 +21,10 @@ app.use('/user', userRoutes)
 const hostname = '0.0.0.0'
 const PORT = process.env.PORT || 5000
 
+app.get('/', (req, res)=>{
+    res.send('APP IS RUNNING...')
+})
+
 // Listening to port 5000
 app.listen(PORT, hostname, ()=> console.log(`Server running at http://${hostname}:${PORT}`))
 
