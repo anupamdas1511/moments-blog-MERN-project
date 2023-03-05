@@ -2,10 +2,6 @@
 
 A MERN based application for posting, viewing, editing and deleting blogs
 
-## Screenshots
-
-
-![Here is an image](https://www.dropbox.com/s/e7cjx5jm78qq0e9/React%20App.png?dl=0)
 
 ## Run Locally
 
